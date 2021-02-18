@@ -8,6 +8,9 @@ Created on Wed Feb 17 18:11:43 2021
 Master script file for Project 1 of MAE 343
 """
 
+import Theta_Calc
+
+
 print('Hello World')
 
 
