@@ -25,10 +25,13 @@ def Func_Name(gamma, M, Theta, Beta):#need a better name
 
 
 
-    # This section is the Mn1, Mn2, etc. 
+    # This section is the Mn1, Mn2, etc. need to check these for correct results
     Mn1=M*math.sin(math.radians(Beta))
     Mn2=((Mn1**2+(2/(gamma-1)))/((2*gamma/(gamma-1)*Mn1**2)-1))**0.5
-
+    M2=Mn2/(math.sin(math.radians(Beta-Theta)))
+    Pressure_Ratio=1+(Mn1**2-1)*(2*gamma/(gamma+1))
+    Density_Ratio=((gamma+1)*Mn1**2)/((gamma-1)*Mn1**2+2)
+    Temperature_ratio=Pressure_Ratio/Density_Ratio
     return #add what need to return here 
 
 
