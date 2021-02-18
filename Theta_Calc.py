@@ -4,6 +4,7 @@ Created on Wed Feb 17 18:50:47 2021
 
 @author: Declan Brick
 """
+import math
 def ThetaCalc(g,M,Beta):
     """
     Calculates flow deflection angle using Equation 1 in the Project Description
@@ -23,4 +24,4 @@ def ThetaCalc(g,M,Beta):
         Flow Deflection Angle, in degrees
 
     """
-    
+    Tan_Theta=2*
