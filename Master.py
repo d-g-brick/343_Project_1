@@ -9,6 +9,7 @@ Master script file for Project 1 of MAE 343
 """
 import math
 import Theta_Calc
+import matplotlib
 
 
 
