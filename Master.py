@@ -38,4 +38,5 @@ def Func_Name(gamma, M, Theta, Beta):#need a better name
 
  
 # Function for the Cp stuff
+# Derivation for Cp is replace rho with P/RT, V with Ma, and a with gamma RT
 # Potato
