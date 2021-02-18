@@ -24,4 +24,9 @@ def ThetaCalc(g,M,Beta):
         Flow Deflection Angle, in degrees
 
     """
-    Tan_Theta=2*
+    #Just writing rhs of Equation 1
+    Tan_Theta=2*(1/math.tan(math.radians(Beta)))*(M**2*(math.sin(math.radians(Beta)))**2-1)/(M**2*(g+math.cos(math.radians(2*Beta)))+2)
+    #Now grabbing the actual angle
+    Theta=math.degrees(math.atan(Tan_Theta))
+    return Theta#this was verified using a Ti-84 to output the correct answer, but many want to change output decimal precision
+    
