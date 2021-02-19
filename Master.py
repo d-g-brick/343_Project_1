@@ -11,7 +11,7 @@ import math
 
 
 def Mach(g,B,T):
-    Mach = ((2*math.tan(T)+2*(1/(math.tan(B)))/(g*math.tan(T)+math.tan(T)*math.cos(2*B)-2*math.sin(B)*math.sin(B)*(1/(math.tan(B))))))
+    Mach = ((2*math.tan(math.radians(T))-2*(1/(math.tan(math.radians(B))))/(g*math.tan(math.radians(T))+math.tan(math.radians(T))*math.cos(2*math.radians(B))-2*math.sin(math.radians(B))*math.cos(math.radians(B)))))**0.5
     return Mach 
 
 def Theta(g,M,Beta):
