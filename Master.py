@@ -32,7 +32,7 @@ def Theta(g,M,Beta):
         Flow Deflection Angle, in degrees
     """
     
-    #Just writing rhs of Equation 1
+    #Just writing rhs of Equation 1 from project description
     Tan_Theta=2*(1/math.tan(math.radians(Beta)))*(M**2*(math.sin(math.radians(Beta)))**2-1)/(M**2*(g+math.cos(math.radians(2*Beta)))+2)
     
     #Now grabbing the actual angle
