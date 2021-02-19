@@ -10,10 +10,11 @@ Project 1
 import math
 
 
-def Mach(g,M,T):
-    return
+def Mach(g,B,T):
+    Mach = ((2*math.tan(T)+2*(1/(math.tan(B)))/(g*math.tan(T)+math.tan(T)*math.cos(2*B)-2*math.sin(B)*math.sin(B)*(1/(math.tan(B))))))
+    return Mach 
 
-def Theta(g,M,B):
+def Theta(g,M,Beta):
     
     """
     Calculates flow deflection angle using Equation 1 in the Project Description
@@ -55,7 +56,7 @@ def Beta(f,M,T,N):
         elif f(Old_T)*solvestore <0:
             Old_M = store
             Old_T = Old_T
-        elif solvestore = 0:
+        elif solvestore == 0:
             print("solution found")
         else:
             print("failed")
