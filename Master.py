@@ -24,7 +24,7 @@ def Func_Name(gamma, M, Theta, Beta):#need a better name
 
 
 
-
+    
 
     # This section is the Mn1, Mn2, etc. need to check these for correct results
     Mn1=M*math.sin(math.radians(Beta))
