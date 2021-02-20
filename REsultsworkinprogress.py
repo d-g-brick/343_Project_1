@@ -217,7 +217,7 @@ if chosen == "Beta":
     print("Flow Deflection angle: ", ver[2])
     print("")
     print("----- Results -----")
-    
+    print("# of Iterations to Convergence", b[1])
     print("Shock Angle", b[0])
     
     gamma = ver[0]
