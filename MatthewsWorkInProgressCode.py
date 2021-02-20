@@ -83,7 +83,7 @@ def beta(gamma, Mach, Theta):
         #iteration is set automatically to 100
 
     #setting bounds
-    for c in range(1,2):
+    for c in range(1,3):
         if c == 1:
             Old_A = math.degrees(BM) #p0
             Old_B = float(90) #p1
