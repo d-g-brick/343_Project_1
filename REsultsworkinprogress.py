@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Feb 19 20:49:25 2021
-@author: dbric
-"""
-
 """
 Declan Brick
 Matthew Bethea
@@ -61,13 +55,8 @@ def theta(gamma, Mach, Beta):
 
 def beta(gamma, Mach, Theta):
     
-    
-    g = gamma
-    M = Mach
-    T = Theta
-    
     #using the functions for finding Beta max (the maximum shock angle) supported by the maximum Theta (the maximum flow deflection)
-    f = lambda B: math.atan(2*(1/math.tan(math.radians(B)))*(M**2*(math.sin(math.radians(B)))**2-1)/(M**2*(g+math.cos(math.radians(2*B)))+2))-math.radians(T)
+    f = lambda B: (math.atan(2*(1/math.tan(math.radians(B)))*(((M**2)*(math.sin(math.radians(B))*math.sin(math.radians(B)))-1)/(((M**2)*(g+math.cos(2*math.radians(B))+2))))))-math.radians(T)
     
     g = gamma
     M = Mach
@@ -89,14 +78,14 @@ def beta(gamma, Mach, Theta):
         #iteration is set automatically to 100
 
     #setting bounds
-    for c in range(1,3):
+    for c in range(1,2):
         if c == 1:
-            Old_A = math.degrees(BM) #p0
-            Old_B = float(90) #p1
+            Old_A = Theta_max
+            Old_B = float(90)
             
         if c == 2:
             Old_A = Mach_angle
-            Old_B = math.degrees(BM)
+            Old_B = Theta_max
         
         #verifying
 ##        if f(Old_A)*f(Old_B) >= 0:
@@ -109,19 +98,30 @@ def beta(gamma, Mach, Theta):
             new = Old_B - f(Old_B)*(Old_B - Old_A)/(f(Old_B)-f(Old_A))
             solvenew = f(new)
             
-            if abs(new-Old_B) <0.0001:
-                sBeta = Old_A - f(Old_A)*(Old_B - Old_A)/(f(Old_B) - f(Old_A))
+            if f(Old_A)*solvenew <0:
                 
-                RBeta.append([sBeta,n])
-                break
-
-            elif n==99:
-                print('failed')
+                Old_A = Old_A
+                Old_B = new
+                
+            elif f(Old_B)*solvenew <0:
+                
+                Old_A = new
+                Old_B = Old_B
+                
+            elif solvenew == 0:
+                sBeta = Old_A - f(Old_A)*(Old_B - Old_A)/(f(Old_B) - f(Old(A)))
+                print("Number of iteration to solution: ", n)
+                print("solution found: ")
+                RBeta.append(sBeta)
+                print(sBeta)
             else:
-                Old_A=Old_B
-                Old_B=new
-            
+                print("Number of iteration to solution: ", n)
+                print("failed")
+                return None
+
     return RBeta
+
+
 
 def M_Beta(g,M):
     #print("veriables")
@@ -175,13 +175,13 @@ def Mach_a(Mach):
 functionMatrix = {
   "Mach":mach,
   "Theta":theta,
-  "Beta":beta ,
+  "Beta":beta,
 }
 
 lst = {
-    "Mach":["gamma", "Beta", "Theta"],
-       "Theta":["gamma", "Mach", "Beta"],
-       "Beta":["gamma", "Mach", "theta"]
+    "Mach":["gamma", "Beta(°)", "Theta(°)"],
+       "Theta":["gamma", "Mach", "Beta(°)"],
+       "Beta":["gamma", "Mach", "theta(°)"]
     }
 
 ver = []
@@ -190,7 +190,7 @@ print("Available Functions:")
 for function in functionMatrix.keys():
   print(function)
 
-chosen = str(input("Which Function Would You Like to run? "))
+chosen = str(input("Which Function Would You Like to run?\n"))
 print(chosen)
 
 variableList = lst[chosen]
@@ -198,71 +198,9 @@ for var in variableList:
     ele = float(input(f"Please input {var}: "))
     ver.append(ele)
 
-results = functionMatrix[chosen](*ver)
+print(chosen, " = ", functionMatrix[chosen](*ver))
 
-if isinstance(results, list):
-    a = results[0]
-    b = results[1]
 
-    # list returned
-else:
-    a = results
-    # 1 value returend
-
-if chosen == "Mach":
-    print("**************Results**************\n\n")
-    print("----- Given -----")
-    print("Shock Angle: ", ver[1])
-    print("Flow Deflection angle: ", ver[2])
-    print("")
-    print("----- Results -----")
-    print("Mach Number: ", a)
-
-    gamma = ver[0]
-    M = a
-    theta = ver[2]
-    Beta = ver[1]
-
-if chosen == "Theta":
-    print("**************Results**************\n\n")
-    print("----- Given -----")
-    print("Mach Number: ", ver[1])
-    print("Shock Angle: ", ver[2])
-    print("")
-    print("----- Results -----")
-    print("Flow Deflection angle: ", a)
-
-    gamma = ver[0]
-    M = ver[1]
-    theta = a
-    Beta = ver[2]
-    
-if chosen == "Beta":
-    print("**************Results**************\n\n")
-    print("----- Given -----")
-    print("Mach Number: ", ver[1])
-    print("Flow Deflection angle: ", ver[2])
-    print("")
-    print("----- Results -----")
-    print("# of Iterations to Convergence", b[1])
-    print("Shock Angle", b[0])
-    
-    gamma = ver[0]
-    M = ver[1]
-    theta = ver[2]
-    Beta = b[0]
-    
-Mn1=M*math.sin(math.radians(Beta))
-Mn2=((Mn1**2+(2/(gamma-1)))/((2*gamma/(gamma-1)*Mn1**2)-1))**0.5
-M2=Mn2/(math.sin(math.radians(Beta-theta)))
-Pressure_Ratio=1+(Mn1**2-1)*(2*gamma/(gamma+1))
-Density_Ratio=((gamma+1)*Mn1**2)/((gamma-1)*Mn1**2+2)
-Temperature_ratio=Pressure_Ratio/Density_Ratio
-print("M1 normal: ", Mn1)
-print("M2 normal: ", Mn2)
-print("M2: ", M2)
-print("P2/P1: ",Pressure_Ratio)
-print("T2/T1: ",Temperature_ratio)
 
 """
 Mn1=M*math.sin(math.radians(Beta))
