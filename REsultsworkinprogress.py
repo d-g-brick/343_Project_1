@@ -217,13 +217,14 @@ if chosen == "Beta":
     print("Flow Deflection angle: ", ver[2])
     print("")
     print("----- Results -----")
-    print("Shock Angle", b)
+    
+    print("Shock Angle", b[0])
     
     gamma = ver[0]
     M = ver[1]
     theta = ver[2]
     Beta = b[0]
-
+    
 Mn1=M*math.sin(math.radians(Beta))
 Mn2=((Mn1**2+(2/(gamma-1)))/((2*gamma/(gamma-1)*Mn1**2)-1))**0.5
 M2=Mn2/(math.sin(math.radians(Beta-theta)))
