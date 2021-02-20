@@ -61,7 +61,7 @@ def beta(gamma, Mach, Theta):
     T = Theta
     
     #using the functions for finding Beta max (the maximum shock angle) supported by the maximum Theta (the maximum flow deflection)
-    f = lambda B: (math.atan(2*(1/math.tan(math.radians(B)))*(((M**2)*(math.sin(math.radians(B))*math.sin(math.radians(B)))-1)/(((M**2)*(g+math.cos(2*math.radians(B))+2))))))-math.radians(T)
+    f = lambda B: math.atan(2*(1/math.tan(math.radians(B)))*(M**2*(math.sin(math.radians(B)))**2-1)/(M**2*(g+math.cos(math.radians(2*B)))+2))-math.radians(T)
     
     g = gamma
     M = Mach
@@ -113,7 +113,6 @@ def beta(gamma, Mach, Theta):
             elif n==99:
                 print("Number of iteration to solution: ", n)
                 print("failed")
-                return None
             else:
                 Old_A=Old_B
                 Old_B=new
