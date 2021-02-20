@@ -121,7 +121,7 @@ def beta(gamma, Mach, Theta):
             else:
                 Old_A=Old_B
                 Old_B=new
-            
+   
     return RBeta
 
 def M_Beta(g,M):
@@ -172,19 +172,27 @@ def Mach_a(Mach):
 
 
 def Cp(M,g):
-    CP=[]
-    Beta=[]
-    Theta=[]
-    for i in range(0,21):
-        Theta.append(i)
-        Beta.append(beta(g,M,i)[1])
+    for i in range(0,len(M)):
+        plot=[]
+        m1=M[i]
+        CP=[]
+        Beta=[]
+        Theta=[]
+        for ii in range(0,21): #solve for Beta values
+            Theta.append(ii)
+            Beta.append(beta(g,m1,ii)[1][0])
     
-    for i in range(0,21):
-        Mn1=M*math.sin(math.radians(Beta[i]))
-        Pressure_Ratio=1+(Mn1**2-1)*(2*g/(g+1))
-        CP.append(2/(g*M**2)*(Pressure_Ratio-1))
-    
-    m.pyplot.plot(Theta,CP)
+        for ii in range(0,21): #solve for pressure values
+            print(Beta[ii])
+            Mn1=m1*math.sin(math.radians(Beta[ii]))
+            Pressure_Ratio=1+(Mn1**2-1)*(2*g/(g+1))
+            CP.append(2/(g*m1**2)*(Pressure_Ratio-1))
+        print('Line'+str(i))
+        m.pyplot.plot(Theta,CP, label='M='+str(m1))
+    m.pyplot.title('Pressure Coefficient vs. Flow Deflection Angle')
+    m.pyplot.xlabel('Flow Deflection Angle (°)')
+    m.pyplot.ylabel('Pressure Coefficient')
+    m.pyplot.figlegend(loc='best')
     return 
 
 
