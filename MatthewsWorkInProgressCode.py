@@ -57,10 +57,11 @@ def beta(gamma, Mach, Theta):
     
     #using the functions for finding Beta max (the maximum shock angle) supported by the maximum Theta (the maximum flow deflection
 
-    f = lambda B: (1/math.tan(2*(1/math.tan(math.radians(B)))*(((M**2)*(math.sin(math.radians(B))*math.sin(math.radians(B)))-1)/(((M**2)*(g+math.cos(2*math.radians(B))+2))))))-math.radians(Theta)
+    f = lambda B: (1/math.tan(2*(1/math.tan(math.radians(B)))*(((M**2)*(math.sin(math.radians(B))*math.sin(math.radians(B)))-1)/(((M**2)*(g+math.cos(2*math.radians(B))+2))))))-math.radians(T)
     
     g = gamma
     M = Mach
+    T = Theta
     
     RBeta = []
     
@@ -89,6 +90,7 @@ def beta(gamma, Mach, Theta):
         
         #verifying
         if f(Old_A)*f(Old_B) >= 0:
+            print("failed verification")
             return None
 
         #iterating to find the solution for beta
@@ -113,7 +115,7 @@ def beta(gamma, Mach, Theta):
                 print("solution found: ")
                 RBeta.append(sBeta)
             else:
-                
+                print("Number of iteration to solution: ", n)
                 print("failed")
                 return None
 
@@ -122,28 +124,37 @@ def beta(gamma, Mach, Theta):
 
 
 def M_Beta(g,M):
-    
+    print("veriables")
+    print(g)
+    print(M)
     f1 = 1+((g-1)/2)*(M**2)+((g+1)/16)*(M**4)
     f2 = math.sqrt((g+1)*f1)
-    f3 = (((g+1)/4)*M**2+f2-1)
+    f3 = (((g+1)/4)*(M**2)+f2-1)
     f4 = math.sqrt((1/(g*(M**2)))*f3)
-    BM = 1/math.sin(f4)
-    
+    BM = math.asin(f4)
+    print("Beta Max")
+    print(BM)
     return BM
 
+
 def M_Theta(gamma, Mach, Beta):
+
+    print("Varribles")
+    print(gamma)
+    print(Mach)
+    print(Beta)
     
     g = gamma
     M = math.radians(Mach)
-    B = math.radians(Beta)
+    B = Beta
     
-    top = (((M**2)*(math.sin(B-1)*math.sin(B-1)))*(1/math.tan(B)))
-    bot = ((1/2)*(g+1)*(M**2)-(M**2)*(math.sin(B)*math.sin(B))+1)
+    top = ((M**2)*(math.sin(B)*math.sin(B))-1)*(1/math.tan(B))
+    bot = (((1/2)*(g+1)*(M**2))-((M**2)*(math.sin(B)*math.sin(B)))+1)
     
-    TM = 1/math.tan(top/bot)
+    TM = 1/(math.tan(top/bot))
 
     print("The maximum flow deflection is ")
-    print(math.degrees(TM))
+    print(TM)
     
     return TM
 
