@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Feb 19 20:49:25 2021
+@author: dbric
+"""
+
 """
 Declan Brick
 Matthew Bethea
@@ -171,7 +177,7 @@ def Mach_a(Mach):
 functionMatrix = {
   "Mach":mach,
   "Theta":theta,
-  "Beta":beta,
+  "Beta":shock ,
 }
 
 lst = {
@@ -186,15 +192,22 @@ print("Available Functions:")
 for function in functionMatrix.keys():
   print(function)
 
-chosen = str(input("Which Function Would You Like to run?\n"))
+chosen = str(input("Which Function Would You Like to run? "))
 print(chosen)
 
 variableList = lst[chosen]
 for var in variableList:
     ele = float(input(f"Please input {var}: "))
     ver.append(ele)
-
-print(chosen, " = ", functionMatrix[chosen](*ver))
+    
+result = functionMatrix[chosen](*ver)
+if isinstance(result, list):
+    a,b = results
+    a = results[0]
+    b = results[1]
+    pass # list returned
+else:
+    pass # 1 value returend
 
 
 
