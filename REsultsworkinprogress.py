@@ -14,6 +14,7 @@ Project 1
 
 #import here
 import math
+import matplotlib as m
 
 def mach(gamma, Beta, Theta):
     
@@ -170,6 +171,23 @@ def Mach_a(Mach):
     return mu
 
 
+def Cp(M,g):
+    CP=[]
+    Beta=[]
+    Theta=[]
+    for i in range(0,21):
+        Theta.append(i)
+        Beta.append(beta(g,M,i)[1])
+    
+    for i in range(0,21):
+        Mn1=M*math.sin(math.radians(Beta[i]))
+        Pressure_Ratio=1+(Mn1**2-1)*(2*g/(g+1))
+        CP.append(2/(g*M**2)*(Pressure_Ratio-1))
+    
+    m.pyplot.plot(Theta,CP)
+    return 
+
+
 #Main Code area
 
 functionMatrix = {
@@ -216,7 +234,7 @@ if chosen == "Mach":
     print("Flow Deflection angle: ", ver[2])
     print("")
     print("----- Results -----")
-    print("Mach Number: ", a)
+    print("Mach Number: ", round(a,4))
 
     gamma = ver[0]
     M = a
@@ -230,7 +248,7 @@ if chosen == "Theta":
     print("Shock Angle: ", ver[2])
     print("")
     print("----- Results -----")
-    print("Flow Deflection angle: ", a)
+    print("Flow Deflection angle: ", round(a,4))
 
     gamma = ver[0]
     M = ver[1]
@@ -245,7 +263,7 @@ if chosen == "Beta":
     print("")
     print("----- Results -----")
     print("# of Iterations to Convergence", b[1])
-    print("Shock Angle", b[0])
+    print("Shock Angle", round(b[0],4))
     
     gamma = ver[0]
     M = ver[1]
@@ -258,11 +276,11 @@ M2=Mn2/(math.sin(math.radians(Beta-theta)))
 Pressure_Ratio=1+(Mn1**2-1)*(2*gamma/(gamma+1))
 Density_Ratio=((gamma+1)*Mn1**2)/((gamma-1)*Mn1**2+2)
 Temperature_ratio=Pressure_Ratio/Density_Ratio
-print("M1 normal: ", Mn1)
-print("M2 normal: ", Mn2)
-print("M2: ", M2)
-print("P2/P1: ",Pressure_Ratio)
-print("T2/T1: ",Temperature_ratio)
+print("M1 normal: ", round(Mn1,4))
+print("M2 normal: ", round(Mn2,4))
+print("M2: ", round(M2,4))
+print("P2/P1: ", round(Pressure_Ratio,4))
+print("T2/T1: ",round(Temperature_ratio,4))
 
 """
 Mn1=M*math.sin(math.radians(Beta))
