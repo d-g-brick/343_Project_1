@@ -212,18 +212,30 @@ else:
 if chosen == "Mach":
     print("**************Results**************\n\n")
     print("----- Given -----")
-    print("Beta: ", ver[1])
-    print("Theta: ", ver[2])
+    print("Shock Angle: ", ver[1])
+    print("Flow Deflection angle: ", ver[2])
     print("")
     print("----- Results -----")
+    print("Mach Number: ", a)
+
+    gamma = ver[0]
+    M = a
+    theta = ver[2]
+    Beta = ver[1]
 
 if chosen == "Theta":
     print("**************Results**************\n\n")
     print("----- Given -----")
-    print("Mach: ", ver[1])
-    print("Beta: ", ver[2])
+    print("Mach Number: ", ver[1])
+    print("Shock Angle: ", ver[2])
     print("")
     print("----- Results -----")
+    print("Flow Deflection angle: ", a)
+
+    gamma = ver[0]
+    M = ver[1]
+    theta = a
+    Beta = ver[2]
     
 if chosen == "Beta":
     print("**************Results**************\n\n")
@@ -260,4 +272,3 @@ Pressure_Ratio=1+(Mn1**2-1)*(2*gamma/(gamma+1))
 Density_Ratio=((gamma+1)*Mn1**2)/((gamma-1)*Mn1**2+2)
 Temperature_ratio=Pressure_Ratio/Density_Ratio
 """
-© 2021 GitHub, Inc.
