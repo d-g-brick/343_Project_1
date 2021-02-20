@@ -15,7 +15,7 @@ Project 1
 
 #import here
 import math
-
+import matplotlib as m
 def mach(gamma, Beta, Theta):
     
     B = math.radians(Beta)
@@ -173,6 +173,23 @@ def Mach_a(Mach):
     return mu
 
 
+
+def Cp(M,g):
+    CP=[]
+    Beta=[]
+    Theta=[]
+    for i in range(0,21):
+        Theta.append(i)
+        Beta.append(beta(g,M,i)[1])
+    
+    for i in range(0,21):
+        Mn1=M*math.sin(math.radians(Beta[i]))
+        Pressure_Ratio=1+(Mn1**2-1)*(2*g/(g+1))
+        CP.append(2/(g*M**2)*(Pressure_Ratio-1))
+    
+    m.pyplot.plot(Theta,CP)
+    return 
+
 #Main Code area
 
 functionMatrix = {
@@ -201,7 +218,10 @@ for var in variableList:
     ele = float(input(f"Please input {var}: "))
     ver.append(ele)
 
+
 print(chosen, " = ", functionMatrix[chosen](*ver))
+
+
 
 
 
