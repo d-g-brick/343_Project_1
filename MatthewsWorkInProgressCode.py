@@ -119,23 +119,6 @@ def beta(gamma, Mach, Theta):
             print (n)
     return RBeta
 
-
-'''    
-            elif f(Old_B)*solvenew <0:
-                
-                Old_A = new
-                Old_B = Old_B
-                
-            elif solvenew == 0:
-                sBeta = Old_A - f(Old_A)*(Old_B - Old_A)/(f(Old_B) - f(Old(A)))
-                print("Number of iteration to solution: ", n)
-                print("solution found: ")
-                RBeta.append(sBeta)
-            elif n==99:
-                sBeta = Old_A - f(Old_A)*(Old_B - Old_A)/(f(Old_B) - f(Old(A)))
-                print(sBeta)
-                return sBeta
-            '''
 def M_Beta(g,M):
     #print("veriables")
     #print(g)
