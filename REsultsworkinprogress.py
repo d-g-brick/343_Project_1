@@ -222,19 +222,19 @@ if chosen == "Beta":
     gamma = ver[0]
     M = ver[1]
     theta = ver[2]
-    Beta = b
+    Beta = b[0]
 
 Mn1=M*math.sin(math.radians(Beta))
 Mn2=((Mn1**2+(2/(gamma-1)))/((2*gamma/(gamma-1)*Mn1**2)-1))**0.5
-M2=Mn2/(math.sin(math.radians(Beta-Theta)))
+M2=Mn2/(math.sin(math.radians(Beta-theta)))
 Pressure_Ratio=1+(Mn1**2-1)*(2*gamma/(gamma+1))
 Density_Ratio=((gamma+1)*Mn1**2)/((gamma-1)*Mn1**2+2)
 Temperature_ratio=Pressure_Ratio/Density_Ratio
 print("M1 normal: ", Mn1)
 print("M2 normal: ", Mn2)
 print("M2: ", M2)
-print("P2/P1: ",Pressure_Ration)
-print("T2/T1: ",Temperature_ration)
+print("P2/P1: ",Pressure_Ratio)
+print("T2/T1: ",Temperature_ratio)
 
 """
 Mn1=M*math.sin(math.radians(Beta))
