@@ -145,13 +145,13 @@ def M_Theta(gamma, Mach, Beta):
     print(Beta)
     
     g = gamma
-    M = math.radians(Mach)
+    M = Mach
     B = Beta
     
     top = ((M**2)*(math.sin(B)*math.sin(B))-1)*(1/math.tan(B))
     bot = (((1/2)*(g+1)*(M**2))-((M**2)*(math.sin(B)*math.sin(B)))+1)
     
-    TM = 1/(math.tan(top/bot))
+    TM = math.degrees(1/(math.tan(top/bot)))
 
     print("The maximum flow deflection is ")
     print(TM)
@@ -161,9 +161,11 @@ def M_Theta(gamma, Mach, Beta):
 
 def Mach_a(Mach):
     
-    M = math.radians(Mach)
+    M = Mach
     
-    mu = 1/(math.sin(1/M))
+    mu = math.degrees(math.asin(1/M))
+
+    print(mu)
     
     return mu
 
