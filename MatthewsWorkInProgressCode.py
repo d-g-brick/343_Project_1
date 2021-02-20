@@ -111,18 +111,16 @@ def beta(gamma, Mach, Theta):
             
             if abs(new-Old_B) <0.0001:
                 sBeta = Old_A - f(Old_A)*(Old_B - Old_A)/(f(Old_B) - f(Old_A))
-                print("Number of iteration to solution: ", n)
-                print("solution found: ")
-                RBeta.append(sBeta)
+                
+                RBeta.append([sBeta,n])
                 break
 
             elif n==99:
-                print("Number of iteration to solution: ", n)
-                print("failed")
+                print('failed')
             else:
                 Old_A=Old_B
                 Old_B=new
-            print (n)
+            
     return RBeta
 
 def M_Beta(g,M):
@@ -206,7 +204,7 @@ if isinstance(results, list):
     a,b = results
     a = results[0]
     b = results[1]
-
+    print('potato')
     pass # list returned
 else:
     pass # 1 value returend
