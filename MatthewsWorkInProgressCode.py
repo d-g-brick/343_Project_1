@@ -55,6 +55,11 @@ def theta(gamma, Mach, Beta):
 
 def beta(gamma, Mach, Theta):
     
+    
+    g = gamma
+    M = Mach
+    T = Theta
+    
     #using the functions for finding Beta max (the maximum shock angle) supported by the maximum Theta (the maximum flow deflection)
     f = lambda B: (math.atan(2*(1/math.tan(math.radians(B)))*(((M**2)*(math.sin(math.radians(B))*math.sin(math.radians(B)))-1)/(((M**2)*(g+math.cos(2*math.radians(B))+2))))))-math.radians(T)
     
@@ -80,8 +85,8 @@ def beta(gamma, Mach, Theta):
     #setting bounds
     for c in range(1,2):
         if c == 1:
-            Old_A = Theta_max
-            Old_B = float(90)
+            Old_A = math.degrees(BM) #p0
+            Old_B = float(90) #p1
             
         if c == 2:
             Old_A = Mach_angle
@@ -95,14 +100,28 @@ def beta(gamma, Mach, Theta):
         #iterating to find the solution for beta
         for n in range(1, 100):
             
-            new = Old_A - f(Old_A)*(Old_B - Old_A)/(f(Old_B)-f(Old_A))
+            new = Old_B - f(Old_B)*(Old_B - Old_A)/(f(Old_B)-f(Old_A))
             solvenew = f(new)
             
-            if f(Old_A)*solvenew <0:
-                
-                Old_A = Old_A
-                Old_B = new
-                
+            if abs(new-Old_B) <0.001:
+                sBeta = Old_A - f(Old_A)*(Old_B - Old_A)/(f(Old_B) - f(Old_A))
+                print("Number of iteration to solution: ", n)
+                print("solution found: ")
+                RBeta.append(sBeta)
+                break
+
+            elif n==100:
+                print("Number of iteration to solution: ", n)
+                print("failed")
+                return None
+            else:
+                Old_A=Old_B
+                Old_B=new
+            print (n)
+    return RBeta
+
+
+'''    
             elif f(Old_B)*solvenew <0:
                 
                 Old_A = new
@@ -113,15 +132,11 @@ def beta(gamma, Mach, Theta):
                 print("Number of iteration to solution: ", n)
                 print("solution found: ")
                 RBeta.append(sBeta)
-            else:
-                print("Number of iteration to solution: ", n)
-                print("failed")
-                return None
-
-    return RBeta
-
-
-
+            elif n==99:
+                sBeta = Old_A - f(Old_A)*(Old_B - Old_A)/(f(Old_B) - f(Old(A)))
+                print(sBeta)
+                return sBeta
+            '''
 def M_Beta(g,M):
     #print("veriables")
     #print(g)
