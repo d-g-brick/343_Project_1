@@ -209,7 +209,22 @@ else:
     a = results
     # 1 value returend
 
+if chosen == "Mach":
+    print("**************Results**************\n\n")
+    print("----- Given -----")
+    print("Beta: ", ver[1])
+    print("Theta: ", ver[2])
+    print("")
+    print("----- Results -----")
 
+if chosen == "Theta":
+    print("**************Results**************\n\n")
+    print("----- Given -----")
+    print("Mach: ", ver[1])
+    print("Beta: ", ver[2])
+    print("")
+    print("----- Results -----")
+    
 if chosen == "Beta":
     print("**************Results**************\n\n")
     print("----- Given -----")
@@ -245,3 +260,4 @@ Pressure_Ratio=1+(Mn1**2-1)*(2*gamma/(gamma+1))
 Density_Ratio=((gamma+1)*Mn1**2)/((gamma-1)*Mn1**2+2)
 Temperature_ratio=Pressure_Ratio/Density_Ratio
 """
+© 2021 GitHub, Inc.
