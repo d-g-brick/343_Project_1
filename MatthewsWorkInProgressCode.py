@@ -90,7 +90,7 @@ def beta(gamma, Mach, Theta):
             
         if c == 2:
             Old_A = Mach_angle
-            Old_B = Theta_max
+            Old_B = math.degrees(BM)
         
         #verifying
 ##        if f(Old_A)*f(Old_B) >= 0:
@@ -103,14 +103,14 @@ def beta(gamma, Mach, Theta):
             new = Old_B - f(Old_B)*(Old_B - Old_A)/(f(Old_B)-f(Old_A))
             solvenew = f(new)
             
-            if abs(new-Old_B) <0.001:
+            if abs(new-Old_B) <0.0001:
                 sBeta = Old_A - f(Old_A)*(Old_B - Old_A)/(f(Old_B) - f(Old_A))
                 print("Number of iteration to solution: ", n)
                 print("solution found: ")
                 RBeta.append(sBeta)
                 break
 
-            elif n==100:
+            elif n==99:
                 print("Number of iteration to solution: ", n)
                 print("failed")
                 return None
