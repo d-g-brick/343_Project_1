@@ -177,7 +177,7 @@ def Mach_a(Mach):
 functionMatrix = {
   "Mach":mach,
   "Theta":theta,
-  "Beta":shock ,
+  "Beta":beta ,
 }
 
 lst = {
@@ -200,15 +200,16 @@ for var in variableList:
     ele = float(input(f"Please input {var}: "))
     ver.append(ele)
     
-result = functionMatrix[chosen](*ver)
-if isinstance(result, list):
+results = functionMatrix[chosen](*ver)
+
+if isinstance(results, list):
     a,b = results
     a = results[0]
     b = results[1]
+
     pass # list returned
 else:
     pass # 1 value returend
-
 
 
 """
